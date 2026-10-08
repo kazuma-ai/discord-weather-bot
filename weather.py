@@ -75,6 +75,7 @@ content = (
     f"**【天気】**\n{weather_lines[0]}\n{weather_lines[1] if len(weather_lines) > 1 else ''}\n"
     f"**【気温】**\n ・{temp_str}\n"
     f"**【降水確率】**\n ・{pops_str}"
+    "reoezは運が悪い!"
 )
 
 message = {"content": content}
