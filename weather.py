@@ -17,7 +17,7 @@ with urllib.request.urlopen(req) as res:
 report_dt = datetime.fromisoformat(data[0]["reportDatetime"])
 report_str = report_dt.strftime("%m/%d %H:%M発表")
 
-time_series = data[0]"timeSeries"]
+time_series = data[0]["timeSeries"]
 
 # 地域名と天気概況を取得
 weather_times = time_series[0]["timeDefines"]
