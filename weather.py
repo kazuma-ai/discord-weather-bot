@@ -23,12 +23,27 @@ today_weather = area_data["weathers"][0].replace(" ", " ")
 pops_data = time_series[1]["areas"][0]["pops"]
 pops_str = " / ".join([f"{p}%" for p in pops_data[:4]])
 
+# 気温データの取得
+# timeSeries[2]に気温のデータ
+temps_data = time_series[2]["areas"][0].get("temps", [])
+# 気温データは時間帯によって1つまたは2つ入るため安全に取得
+if len(temps_data) >= 2;
+    min_temp = f"{temps_data[0]}°C"
+    max_temp = f"{temps_data[1]}°C"
+    temps_str = f"{最低{min_temp} / 最高{max_temp}"
+elif len(temps_data} == 1;
+    temps_str = f"予想気温 { temps_data[0]}°C"
+else:
+    temp_str = "データなし"
+    
 # Discordに送るメッセージの組み立て
 content = (
     f"☀️ **今日の天気予報（{area_name}）**\n"
     f"・**天気**: {today_weather}\n"
-    f"・**降水確率**: {pops_str}"
-    "今日はいい日になるだろう。wktk"
+    f"・**気温**: {temp_str}\n"
+    f"・**降水確率**: {pops_str}\n"
+    
+    "今日もいい日になるだろう。wktk"
 )
 
 message = {"content": content}
