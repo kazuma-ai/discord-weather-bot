@@ -1,7 +1,7 @@
 import os
 import json
 import urllib.request
-
+from datetime import datetime 
 # 都道府県コード（例: 大阪府 = 270000）
 AREA_CODE = "270000"
 # GitHub SecretsからWebhook URLを取得
@@ -28,14 +28,14 @@ weathers = area_data["weathers"]
 weather_lines = []
 #直近2日分（今日・明日など）の天気を日時付きで並べる
 for t, w in zip(weather_times[:2], weathers[:2]):
-    dt = datatime.fromisoformat(t)
+    dt = datetime.fromisoformat(t)
     w_clean = w.replace(" "," ")
     weather_lines.append(f" ・{dt.strftime('%m/%d')}: {w_clean}")
 weather_str = "\n".join(weather_lines)
 
 
 # 降水確率を取得（当日分）
-pops_data = time_series[1]["timeDefines"]
+pop_times = time_series[1]["timeDefines"]
 pops = time_series[1]["areas"][0]["pops"]
 
 pop_items = []
@@ -81,5 +81,5 @@ req_discord = urllib.request.Request(
     data=json.dumps(message).encode("utf-8"),
     headers={"Content-Type": "application/json", "User-Agent": "Mozilla/5.0"}
 )
-
+urllib.request.urlopen(req_discord) 
 
