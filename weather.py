@@ -28,6 +28,7 @@ content = (
     f"☀️ **今日の天気予報（{area_name}）**\n"
     f"・**天気**: {today_weather}\n"
     f"・**降水確率**: {pops_str}"
+    "今日はいい日になるだろう。wktk"
 )
 
 message = {"content": content}
