@@ -50,7 +50,8 @@ pops_str = " / ".join(pop_items)
 temp_times = time_series[2]["timeDefines"]
 temps = time_series[2]["areas"][0].get("temps", [])
 
-temp_items = []
+max_temps = []
+min_temps = []
 # 気象庁の仕様で同じ数値が重複して入る場合があるため除外しつつ整形
 seen = set()
 for t, temp in zip(temp_times, temps):
@@ -60,10 +61,13 @@ for t, temp in zip(temp_times, temps):
     seen.add(key)
     dt = datetime.fromisoformat(t)
     # 00:00は朝の最低気温、09:00は日中の最高気温を表す仕様
-    label = "最低(朝)" if dt.hour == 0 else "最高(昼)"
-    temp_items.append(f"{dt.strftime('%m/%d')} {label}: `{temp}℃`")
-
+    if dt.hour == 0:
+        min_temps.append(f"{dt.strftime('%m/%d')} 最低(朝): '{temp}°C'")
+    else:
+        max_temps.append(f"{dt.strftime('%m/%d')} 最高(昼): '{temp}°C'")
+temp_items = max_temps + min_temps
 temp_str = " / ".join(temp_items) if temp_items else "データなし"
+    
 
 # Discordに送るメッセージの組み立て
 content = (
