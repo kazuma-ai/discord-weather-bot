@@ -74,7 +74,7 @@ content = (
     f"☀️ **天気予報（{area_name}）** _{report_str}_\n"
     f"**【天気】**\n{weather_lines[0]}\n{weather_lines[1] if len(weather_lines) > 1 else ''}\n"
     f"**【気温】**\n ・{temp_str}\n"
-    f"**【降水確率】**\n ・{pops_str}"
+    f"**【降水確率】**\n ・{pops_str}\n"
     "good luck have fun"
 )
 
